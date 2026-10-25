@@ -69,14 +69,16 @@ html, body {
 
 #joystickZona {
     position: absolute;
-    bottom: 40px;
-    left: 40px;
+    bottom: 15vh;
+    left: 12vw;
+    
     width: 120px;
     height: 120px;
-    background: hsla(0, 1%, 84%, 0.4);
-    border: none;
+    
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    z-index: 10;
+    z-index: 9999;
     touch-action: none;
     display: flex;
     justify-content: center;
@@ -86,9 +88,25 @@ html, body {
 .joystick-stick {
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     position: absolute;
     transform: translate(0px, 0px);
     pointer-events: none;
+}
+
+@media (orientation: landscape) {
+    #joystickZona {
+        bottom: 15vh !important;
+        left: 10vw !important;
+    }
+}
+
+@media (max-height: 500px) {
+    #joystickZona {
+        bottom: 15px;
+        left: 20px;
+        width: clamp(80px, 25vh, 120px);
+        height: clamp(80px, 25vh, 120px);
+    }
 }

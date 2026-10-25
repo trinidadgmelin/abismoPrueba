@@ -418,21 +418,20 @@ _CreateControls() {
         }
 
         let joystickActive = false;
-        const maxRadius = 35;
 
         zonaEl.addEventListener('pointerdown', (e) => {
             joystickActive = true;
             zonaEl.setPointerCapture(e.pointerId); 
             e.stopPropagation();
             e.preventDefault();
-            this._updateJoystickPos(e, zonaEl, stickEl, maxRadius);
+            this._updateJoystickPos(e, zonaEl, stickEl);
         });
 
         zonaEl.addEventListener('pointermove', (e) => {
             if (!joystickActive) return;
             e.stopPropagation();
             e.preventDefault();
-            this._updateJoystickPos(e, zonaEl, stickEl, maxRadius);
+            this._updateJoystickPos(e, zonaEl, stickEl);
         });
 
         const stopJoystick = (e) => {
@@ -453,10 +452,12 @@ _CreateControls() {
         zonaEl.addEventListener('pointercancel', stopJoystick);
     }
 
-    _updateJoystickPos(e, container, stick, maxRadius) {
+    _updateJoystickPos(e, container, stick) {
         const rect = container.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
+
+        const maxRadius = rect.width * 0.3;
 
         let deltaX = e.clientX - centerX;
         let deltaY = e.clientY - centerY;
